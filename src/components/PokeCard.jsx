@@ -5,7 +5,7 @@ import { PokeLoading } from "./PokeLoading";
 const IMG_URL =
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
 const MODE = 1;
-export const PokeCard = ({ pokemon, index }) => {
+export const PokeCard = ({ pokemon, loading }) => {
   const [color, setColor] = useState("");
   const loadingRef = useRef(null);
   const [shouldLoad, setShouldLoad] = useState(false);
@@ -23,10 +23,10 @@ export const PokeCard = ({ pokemon, index }) => {
       });
       return extractColor[2].color;
     };
-    checkRGB(`${IMG_URL}${index}.png`).then((color) => {
+    checkRGB(`${IMG_URL}${pokemon.id}.png`).then((color) => {
       setColor(color);
     });
-  }, [index]);
+  }, [pokemon]);
 
   useEffect(() => {
     if (!shouldLoad && loadingRef.current) {
@@ -52,8 +52,8 @@ export const PokeCard = ({ pokemon, index }) => {
         >
           <div className="w-full">
             <img
-              className="mx-auto object-cover w-full p-6"
-              src={`${IMG_URL}${index}.png`}
+              className={`mx-auto object-cover w-full p-6`}
+              src={`${IMG_URL}${pokemon.id}.png`}
               alt=""
               loading="lazy"
             />
@@ -66,7 +66,7 @@ export const PokeCard = ({ pokemon, index }) => {
         </div>
       ) : (
         <div
-          className="max-w-sm md:w-full h-fit rounded-xl relative shadow-md"
+          className="max-w-sm md:w-full h-fit rounded-xl shadow-md"
           ref={loadingRef}
         >
           <PokeLoading />

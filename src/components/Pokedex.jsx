@@ -55,11 +55,7 @@ export const Pokedex = () => {
     <>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 px-3">
         {pokemonList.map((pokemon, i) => (
-          <div
-            className="p-2"
-            key={pokemon.order}
-            // style={{ order: pokemon.order }}
-          >
+          <div className="p-2" key={pokemon.id}>
             <PokeCard pokemon={pokemon} loading={loading} index={pokemon.id} />
           </div>
         ))}
